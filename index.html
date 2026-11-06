@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Last of Us - Fan Portal</title>
+  <style>
+    :root {
+      --bg-dark: #121412;
+      --card-bg: #1a1d1a;
+      --accent: #4a6b46;
+      --accent-bright: #689f63;
+      --text: #e0e6e0;
+      --text-dim: #9aa59a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(18,20,18,0.8) 100%),
+                  radial-gradient(circle at center, #2e3d2c 0%, var(--bg-dark) 80%);
+      padding: 40px 20px;
+      text-align: center;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+      letter-spacing: 4px;
+      color: #ffffff;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      text-shadow: 0 0 10px rgba(0,0,0,0.8);
+    }
+
+    header p {
+      color: var(--accent-bright);
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #0b0d0b;
+      padding: 12px;
+      gap: 20px;
+      border-bottom: 1px solid #283327;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav button {
+      background: none;
+      border: 1px solid transparent;
+      color: var(--text-dim);
+      padding: 8px 16px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    nav button:hover, nav button.active {
+      color: #fff;
+      border-color: var(--accent-bright);
+      background-color: rgba(104, 159, 99, 0.1);
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: #ffffff;
+      border-left: 4px solid var(--accent-bright);
+      padding-left: 12px;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border: 1px solid #283327;
+      border-radius: 8px;
+      padding: 20px;
+      flex: 1 1 280px;
+      max-width: 310px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent-bright);
+    }
+
+    .card h3 {
+      color: var(--accent-bright);
+      margin-bottom: 10px;
+      font-size: 1.3rem;
+    }
+
+    .card p {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+    }
+
+    .interactive-box {
+      background: var(--card-bg);
+      border: 1px solid var(--accent);
+      border-radius: 8px;
+      padding: 25px;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .interactive-box select {
+      padding: 10px 15px;
+      background-color: #121412;
+      color: var(--text);
+      border: 1px solid var(--accent-bright);
+      border-radius: 4px;
+      font-size: 1rem;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    .info-display {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #121412;
+      border-radius: 6px;
+      text-align: left;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #0b0d0b;
+      color: var(--text-dim);
+      margin-top: 50px;
+      border-top: 1px solid #283327;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>The Last of Us</h1>
+    <p>Portal Fan & Base de Datos de Supervivencia</p>
+  </header>
+
+  <nav>
+    <button class="active" onclick="filterCards('all')">Todos</button>
+    <button onclick="filterCards('personajes')">Personajes</button>
+    <button onclick="filterCards('infectados')">Infectados</button>
+  </nav>
+
+  <div class="container">
+    <h2 class="section-title">Archivo de Archivos</h2>
+    
+    <div class="grid" id="cardGrid">
+      <div class="card" data-category="personajes">
+        <h3>Joel Miller</h3>
+        <p>Un superviviente despiadado y traumatizado que acepta la misión de escoltar a Ellie a través de unos EE.UU. devastados.</p>
+      </div>
+
+      <div class="card" data-category="personajes">
+        <h3>Ellie Williams</h3>
+        <p>Una joven de 14 años inmune a la infección por Cordyceps, vital para el futuro de la humanidad.</p>
+      </div>
+
+      <div class="card" data-category="infectados">
+        <h3>Chasqueadores (Clickers)</h3>
+        <p>Tercera fase de la infección. Completamente ciegos, utilizan la ecolocalización para detectar a sus presas.</p>
+      </div>
+
+      <div class="card" data-category="infectados">
+        <h3>Hinchados (Bloaters)</h3>
+        <p>Fase avanzada de infección. Cubiertos de blindaje de fúngico espeso y altamente resistentes.</p>
+      </div>
+    </div>
+
+    <div class="interactive-box">
+      <h2>Selector de Amenazas</h2>
+      <p>Selecciona un enemigo para ver consejos tácticos de combate:</p>
+      
+      <select id="threatSelect" onchange="updateThreatInfo()">
+        <option value="">-- Selecciona una amenaza --</option>
+        <option value="corredores">Corredores (Runners)</option>
+        <option value="chasqueadores">Chasqueadores (Clickers)</option>
+        <option value="hinchados">Hinchados (Bloaters)</option>
+      </select>
+
+      <div class="info-display" id="threatDisplay">
+        <p><em>Selecciona una opción arriba para desplegar la información táctica.</em></p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2026 Portal Fan - Proyecto de Desarrollo Web</p>
+  </footer>
+
+  <script>
+    function filterCards(category) {
+      const cards = document.querySelectorAll('.card');
+      const buttons = document.querySelectorAll('nav button');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function updateThreatInfo() {
+      const select = document.getElementById('threatSelect');
+      const display = document.getElementById('threatDisplay');
+      const val = select.value;
+
+      if (val === 'corredores') {
+        display.innerHTML = "<strong>Táctica:</strong> Atacan en grupo. Usa armas melé o sigilo antes de que te rodeen. Las ladrillos y botellas son útiles para desorientar.";
+      } else if (val === 'chasqueadores') {
+        display.innerHTML = "<strong>Táctica:</strong> Muévete agachado a velocidad mínima. Solo pueden ser eliminados sigilosamente con daga (shiv) o a distancia con armas de fuego potentes.";
+      } else if (val === 'hinchados') {
+        display.innerHTML = "<strong>Táctica:</strong> Usa fuego (cócteles molotov o lanzallamas) para debilitar su armadura fúngica antes de disparar a sus puntos débiles.";
+      } else {
+        display.innerHTML = "<p><em>Selecciona una opción arriba para desplegar la información táctica.</em></p>";
+      }
+    }
+  </script>
+
+</body>
+</html>
